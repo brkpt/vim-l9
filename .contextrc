@@ -1,0 +1,262 @@
+if [ -n "$PS1" ]; then
+	echo .contextrc
+fi
+
+export AVACYG=~/ava-cygwin
+export SCITE=/cygdrive/d/depot/bin/scite/scite.exe
+
+function genv()
+{
+	local gamepath=${1}
+	local depotbinpath=$(dirname $(dirname ${1}) )/bin
+	local genv=${depotbinpath}/cygwin/gameenv.sh
+	
+	cd ${gamepath}
+	if [ -a ${genv} ]; then
+		. ${genv}
+	elif [ -a ${AVACYG}/bin/gameenv.sh ]; then
+		. ${AVACYG}/bin/gameenv.sh
+	fi
+	
+	# Set dvdroot
+	#setndenv "dvdroot" "${gamepath}/image/wii"
+}
+
+# Stuff for Perforce
+#~ P4DIFF="C:/Program Files (x86)/KDiff3/KDiff3.exe"
+#~ P4MERGE="C:/Program Files (x86)/WinMerge/WinMergeU.exe"
+
+# Work related ones
+#~ alias pending='p4.sh changes -u matt_smith -s pending'
+#~ alias rvl='cd ${REVOLUTION_SDK_ROOT}'
+#~ alias ndev='cd ${PROJECT_ROOT}/code/external/wii/ndev'
+
+#~ alias gitsync='(cd ${PROJECT_ROOT}; luaplus scripts/util/getlastp4commit.lua)'
+#~ alias rsln='(cd ${GamePath}/temp/game-${GameName}; export ./JamRefreshSolution.bat; open Game-${GameName}.sln)'
+#~ alias sln='(cd ${GamePath}/temp/game-${GameName}; open Game-${GameName}.sln)'
+alias mcw='(cd "${CWFOLDER_RVL}/bin"; cygstart ide.exe; cygstart ${EXTERNAL_DEPOTBIN}/putty.exe -load "ndev")'
+alias wiiprof='(cd "${REVOLUTION_SDK_ROOT}x86/bin"; cygstart WiiProfiler.exe)'
+alias last='p4last'
+alias gv='cygstart c:/program\ files/vim/vim72/gvim.exe'
+alias find='/usr/bin/find'
+alias gchl='luaplus ${UtilScripts}getlastp4commit.lua'
+#alias sn='cygstart d:/depot/bin/scite/scite.exe -check.if.already.open=0'
+#alias excel='cygstart "${PROGRAMFILES}/Microsoft Office/Office12/excel"'
+alias asvr='cygstart ${UtilScripts}AssetServer.bat'
+alias fixwr='luaplus ${EXTERNAL_DEPOTBIN}/scripts/fixwriteable.lua'
+alias bgo='b -t all'
+alias bao='b -a'
+alias bfg='b -f -t all'
+alias bfa='b -f -t Assets'
+alias bf='b -f'
+alias bap='b -t all win32,x360,ps3,wii'
+alias bapc='b -t all win32,x360,ps3,wii:debug,optimized,profile,consumer'
+alias bapf='b -f -t all win32,x360,ps3,wii'
+alias bapcf='b -f -t all win32,x360,ps3,wii:debug,optimized,profile,consumer'
+alias screenshot='(cygstart -d "${REVOLUTION_SDK_ROOT}../../screenshot" "${REVOLUTION_SDK_ROOT}../../screenshot/screenshot.exe")'
+alias wiimap='python "${UtilScripts}/WiiMap/WiiMap.py"'
+alias p4gitsync='(cd $PROJECT_ROOT; ../SyncP4Changelist.sh)'
+alias runtrendy='(cd ${GameImagePath}wii; python ${UtilScripts}WiiMap/WiiMap.py -t Game-Cars.consumer.wii.map)'
+alias preloads='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/preloads.lua'
+alias precache='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/precache.lua'
+alias choinstances='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/choinstances.lua'
+alias iso='cd ${PROJECT_ROOT}/octane/build/iso'
+alias mbg='mybuilds-good'
+
+#~ Checks the current git status to make sure it is:
+#~ 1: On the master branch
+#~ 2: That there are no outstanding commits
+#~
+#~ Returns:
+#~   0: If clean and on the right branch
+#~   1: If it is not in the master branch
+#~   2: If there are outstanding commits
+function checkgitstatus()
+{
+	local testval=$(git status)
+	local testbranch=$(echo "${testval}" | grep "On branch cars/master")
+	local testclean=$(echo "${testval}" | grep "nothing to commit")
+
+	if [ -z "${testbranch}" ]; then
+		return 1;
+	fi
+	
+	if [ -z "${testclean}" ]; then
+		return 2;
+	fi
+	
+return 0;
+}
+
+function fq()
+{
+	find . -name $1 | sed -e 's/\(.*\)/\"\1\"/g'
+}
+
+function s()
+{
+	local scitepath="${SCITE}"
+
+	if [ $# -eq 0 ]; then
+		cygstart "${scitepath}"
+	else
+		for arg in $@; do
+			local fixedpath=$(cygpath -wa "${arg}")
+			cygstart "${scitepath}" "${fixedpath}"
+		done
+	fi
+}
+
+function sn()
+{
+	local scitepath="${SCITE}"
+
+	if [ $# -eq 0 ]; then
+		cygstart "${scitepath}" -check.if.already.open=0
+	else
+		for arg in $@; do
+			local fixedpath=$(cygpath -wa "${arg}")
+			cygstart "${scitepath}" -check.if.already.open=0 "${fixedpath}"
+		done
+	fi
+}
+
+function dbin()
+{
+	local dbinpath="d:/depot/bin"
+	if [ -n "${EXTERNAL_DEPOTBIN}" ]; then
+		dbinpath="${EXTERNAL_DEPOTBIN}"
+	fi
+	cd ${dbinpath}
+}
+
+function buildrpf()
+{
+	if [ -z ${GameName} ]; then
+		echo You need to run gameenv.sh
+	else
+		oldpwd=${PWD}
+		cd ${GameImagePath}
+		${UtilScripts}elf-to-rvm.sh -p "$@"
+		cd ${oldpwd}
+	fi
+}
+
+function buildrvm()
+{
+	if [ -z ${GameName} ]; then
+		echo You need to run gameenv.sh
+	else
+		oldpwd=${PWD}
+		cd ${GameImagePath}
+		${UtilScripts}elf-to-rvm.sh "$@"
+		cd ${oldpwd}
+	fi
+}
+
+function makedlf
+{
+	if [ -z ${GameName} ]; then
+		echo You need to run gameenv.sh
+	else
+		oldpwd=${PWD}
+		cd ${GameImagePath}
+		ndevrun -d=wii/DiscLayout_NA1.ddf "$@"
+		cd ${oldpwd}
+	fi
+	
+}
+
+function update_rvmcl
+{
+	oldpwd=${PWD}
+	cd ${PROJECT_ROOT}
+	p4cl=`${DEPOTBIN}/cygwin/p4.sh changes -m1 ...#have | cut -d' ' -f2`
+	echo Changelist ${p4cl}
+	cd ${oldpwd}
+	for rvm in *.rvm; do 
+		outrvm=`echo ${rvm} | sed "s/CLUnknown/${p4cl}/g"`; 
+		echo $rvm ---\> $outrvm;
+		mv $rvm $outrvm; 		
+	done
+}
+
+function postall
+{
+	p4cl=${1}
+		if [ -z "${p4cl}" ]; then
+		oldpwd=${PWD}
+		cd ${PROJECT_ROOT}
+		p4cl=`${DEPOTBIN}/cygwin/p4.sh changes -m1 ...#have | cut -d' ' -f2`
+		cd ${oldpwd}
+	fi
+	
+	echo Changelist ${p4cl}
+	
+	for script in makeBurnable*; do
+		sku=`echo ${script} | sed "s/.*makeBurnableRVM_\(.*\)/\1/"`
+		./${script}
+		#~ echo ${sku};
+		discrvm=`ls *${sku}*.disc.rvm`
+		#~ echo $discrvm
+		outrvm=`echo ${discrvm} | sed "s/CLUnknown/${p4cl}/g"`
+		echo $discrvm ---\> $outrvm
+		mv $discrvm $outrvm
+		(cp -i $outrvm //slcfiles/Cars2/Builds/Wii/${outrvm}) &
+	done
+
+}
+
+function excel()
+{
+	if [ $# -eq 0 ]; then
+		cygstart "${PROGRAMFILES}/Microsoft Office/Office12/excel"
+	else
+		for arg in $@; do
+			local fixedpath=$(cygpath -wa "${arg}")
+		cygstart "${PROGRAMFILES}/Microsoft Office/Office12/excel" "${fixedpath}"
+		done
+	fi
+}
+
+
+function m2()
+{
+	genv d:/dev-m2/main/m2
+	export BUILD_SPEC="x360:optimized"
+	export GIT_EDITOR="${AVACYG}/bin/git-scite"
+	setndenv dvdroot d:/dev-m2/main/m2/image/wii
+}
+
+function cars()
+{
+	genv d:/dev-cars/main/cars
+#	setndenv DvdRoot d:/dev-cars/main/cars/image/wii
+	export BUILD_SPEC="wii:optimized"
+}
+
+function mybuilds-good()
+{
+	# Grab the log from the server
+	curl -s "http://slcmybuilds/api/v1/project/tbx/branch/m2/build/index?status=good&limit=1" | grep "git_sha" | cut -d: -f2 | sed 's/"//g; s/,//g; s/ //g'
+
+}
+
+#~ __dvdroot()
+#~ {
+	#~ local getndenv="d:/depot/external/wii/ndev/bin/getndenv"
+	#~ local dvdroot="$(basename $(dirname $(dirname $(${getndenv} | cut -f2 | tr -d \"))))"
+	#~ printf $dvdroot
+#~ }
+#
+#~ PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]
+#~ ($(__dvdroot)$(__git_ps1 ":%s"))\[\e[1;37m\]\$ '
+
+# Git prompt
+#~ PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]
+#~ $(__git_ps1 "(%s)")\[\e[1;37m\]\$ '
+
+PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]
+\[\e[1;37m\]\$ '
+
+#PS1='\n\$ '

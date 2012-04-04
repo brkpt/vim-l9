@@ -1,0 +1,62 @@
+# -*- mode:sh -*-
+
+# Game environment rc file
+#
+# Set variables here that will define personal settings and defaults throughout the gameenv.sh
+# system.  
+#
+# NOTE: If you change anything in this file, you should re-source your gameenv.sh!
+
+# TODO:
+#
+#  when bash 4.0 comes around, we can use associative arrays with the 'dark red' color stuff and
+#  not have two color possibilities for the perl and the prompt colors.
+
+# ----- gameenv.sh:
+
+# Colors are:
+#  color_red, color_yellow, color_green, color_blue, color_magenta, color_cyan,
+#  color_black, color_white, color_off
+
+# color for the path portion of the prompt
+#GAMEENV_PATHCOLOR=color_cyan   # dark background
+GAMEENV_PATHCOLOR=color_blue   # light background
+
+# color for the project portion of the prompt
+#GAMEENV_PROJECTCOLOR=color_green   # dark background
+GAMEENV_PROJECTCOLOR=color_green   # light background
+
+# change the behavior of the gameenv prompt.
+#  dark (for dark backgrounds), light (for light backgrounds), none (don't change the prompt)
+GAMEENV_PROMPT=none
+
+# character to use as the prompting symbol ($, >, %, etc).
+#GAMEENV_PROMPTCHAR='>'
+GAMEENV_PROMPTCHAR='\$'
+
+
+# ----- build.sh:
+
+# default build spec for build.sh
+#export BUILD_SPEC="win32,x360:debug,optimized"
+#export BUILD_SPEC="wii:debug"
+
+# default target for build.sh
+export BUILD_TARGET="all"
+
+# default verbosity level or build.sh
+#export BUILD_VERBOSE=0
+
+
+# ----- build-color.sh:
+
+# Colors are 6 bit r g b tuples.  
+#export BUILDCOLOR_PATH='clear'
+export BUILDCOLOR_NAME='5 5 0'		# yellow
+#export BUILDCOLOR_LINE='cyan'
+#export BUILDCOLOR_NUMBER='blue'
+#export BUILDCOLOR_MESSAGE='clear'
+#export BUILDCOLOR_ERROR='red'
+#export BUILDCOLOR_WARNING='yellow'
+#export BUILDCOLOR_REPEAT='clear'
+

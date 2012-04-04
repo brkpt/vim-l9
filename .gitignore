@@ -1,0 +1,51 @@
+.bash_history
+.gimp-2.6/
+.gitconfig
+.gitk
+.inputrc
+.kdiff3rc
+.lesshst
+.minttyrc
+.p4admin/
+.p4ob/
+.p4qt/
+.prompt_colors
+.ssh/
+AppData/
+Application Data
+Contacts/
+Cookies
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Local Settings
+Music/
+My Documents
+NTUSER.DAT
+NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf
+NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms
+NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms
+NetHood
+PCFSServer.exe.stackdump
+Pictures/
+PrintHood
+Recent
+Saved Games/
+SciTE.session
+SciTEUser.properties
+Searches/
+SendTo
+Start Menu
+Templates
+Tracing/
+Videos/
+ava-cygwin/
+eee/
+ntuser.dat.LOG1
+ntuser.dat.LOG2
+ntuser.ini
+ntuser.pol
+p4tickets.txt
+
