@@ -48,4 +48,7 @@ ntuser.dat.LOG2
 ntuser.ini
 ntuser.pol
 p4tickets.txt
-
+.thumbnails/
+ntuser.dat{626a5e38-9a23-11e1-a087-2c27d7f0d690}.TM.blf
+ntuser.dat{626a5e38-9a23-11e1-a087-2c27d7f0d690}.TMContainer00000000000000000001.regtrans-ms
+ntuser.dat{626a5e38-9a23-11e1-a087-2c27d7f0d690}.TMContainer00000000000000000002.regtrans-ms
