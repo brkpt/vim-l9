@@ -23,6 +23,8 @@ export VISUAL=vim
 export CYGWIN='nodosfilewarning codepage:oem binmode title glob:ignorecase'
 export HISTCONTROL=ignoredups
 export INPUTRC=$HOME/.inputrc
+export PAGER="less -R"
+export TERM='cygwin'
 
 # Shell Options
 # #############
@@ -122,7 +124,7 @@ alias actordump='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/actordump.l
 #alias cls='clear'
 
 # Some shortcuts for different directory listings
-alias ls='ls -hF --color=tty'                 # classify files in colour
+alias ls='ls -hF --color=auto'                 # classify files in colour
 alias dir='ls --color=auto --format=vertical'
 alias vdir='ls --color=auto --format=long'
 alias ll='ls -l'                              # long list
@@ -136,7 +138,7 @@ function favs() {
 
 # Dircolors
 ###########
-eval "`dircolors -b ~/.dircolors`"
+eval "$(dircolors -b ~/.dircolors)"
 
 # Functions
 # #########

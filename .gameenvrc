@@ -18,22 +18,49 @@
 #  color_red, color_yellow, color_green, color_blue, color_magenta, color_cyan,
 #  color_black, color_white, color_off
 
-# color for the path portion of the prompt
-#GAMEENV_PATHCOLOR=color_cyan   # dark background
-GAMEENV_PATHCOLOR=color_blue   # light background
-
-# color for the project portion of the prompt
-#GAMEENV_PROJECTCOLOR=color_green   # dark background
-GAMEENV_PROJECTCOLOR=color_green   # light background
+#GAMEENV_COLOR_PROJECT  the color of the "project", "game directory" and "game name"
+#GAMEENV_COLOR_CWD      the color of the current working directory
+#GAMEENV_COLOR_GIT      the color of the git PS1 additions
+export GAMEENV_COLOR_PROJECT='color_fg_rgb 5 5 5'
+export GAMEENV_COLOR_GIT='color_fg_rgb 0 3 0'
+export GAMEENV_COLOR_CWD='color_fg_rgb 5 5 1'
 
 # change the behavior of the gameenv prompt.
 #  dark (for dark backgrounds), light (for light backgrounds), none (don't change the prompt)
-GAMEENV_PROMPT=none
+# GAMEENV_PROMPT_OPTIONS  options for what appears in the prompt
+#   contains any combination of:
+#     x: xterm title sequence "[game_dir:game_name] cwd_basename"
+#     d: game directory "[game_dir]"
+#     n: game name "[game_name]"
+#     p: both d and n "[game_dir:game_name]" (drop :game_name if they are equal)
+#     w: current working directory
+#     g: __git_ps1 "(branch)"
+#     2: newline before prompt char (2-line prompt)
+#   if blank (""), don't override prompt
+#export GAMEENV_PROMPT_OPTIONS="wgx2"
+export GAMEENV_PROMPT_OPTIONS=""
 
 # character to use as the prompting symbol ($, >, %, etc).
 #GAMEENV_PROMPTCHAR='>'
-GAMEENV_PROMPTCHAR='\$'
+export GAMEENV_PROMPTCHAR='\$'
 
+
+# ----- git-tiny-log-notes
+
+#GIT_COLOR_HASH        - commit hash color
+#GIT_COLOR_DATE        - date color
+#GIT_COLOR_AUTHOR      - commit authors name color
+#GIT_COLOR_DECORATION  - branch decoration color
+#GIT_COLOR_SUBJECT     - commit message color
+#GIT_COLOR_NOTES
+#GIT_COLOR_STRIPE
+export GIT_COLOR_HASH='color_fg_rgb 5 2 0'
+export GIT_COLOR_DATE='color_fg_rgb 0 2 5'
+export GIT_COLOR_AUTHOR='color_fg_rgb 4 4 0'
+export GIT_COLOR_DECORATION='color_fg_rgb 0 3 0'
+export GIT_COLOR_SUBJECT='color_fg_rgb 3 3 3'
+export GIT_COLOR_NOTES='color_fg_rgb 5 5 5'
+export GIT_COLOR_STRIPE='color_bg_rgb 1 1 1'
 
 # ----- build.sh:
 
@@ -59,4 +86,5 @@ export BUILDCOLOR_NAME='5 5 0'		# yellow
 #export BUILDCOLOR_ERROR='red'
 #export BUILDCOLOR_WARNING='yellow'
 #export BUILDCOLOR_REPEAT='clear'
+
 

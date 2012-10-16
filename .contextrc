@@ -37,7 +37,7 @@ function genv()
 alias mcw='(cd "${CWFOLDER_RVL}/bin"; cygstart ide.exe; cygstart ${EXTERNAL_DEPOTBIN}/putty.exe -load "ndev")'
 alias wiiprof='(cd "${REVOLUTION_SDK_ROOT}x86/bin"; cygstart WiiProfiler.exe)'
 alias last='p4last'
-alias gv='cygstart c:/program\ files/vim/vim72/gvim.exe'
+alias gv='cygstart "${PROGRAMFILES}/vim/vim73/gvim.exe"'
 alias find='/usr/bin/find'
 alias gchl='luaplus ${UtilScripts}getlastp4commit.lua'
 #alias sn='cygstart d:/depot/bin/scite/scite.exe -check.if.already.open=0'
@@ -62,6 +62,8 @@ alias precache='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/precache.lua
 alias choinstances='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/choinstances.lua'
 alias iso='cd ${PROJECT_ROOT}/octane/build/iso'
 alias mbg='mybuilds-good'
+alias ard='cygstart "${PROGRAMFILES}/Arduino/arduino.exe"'
+alias gtln='git-tiny-log-notes'
 
 #~ Checks the current git status to make sure it is:
 #~ 1: On the master branch
@@ -90,7 +92,11 @@ return 0;
 
 function fq()
 {
-	find . -name $1 | sed -e 's/\(.*\)/\"\1\"/g'
+	if [ -z "${1}" ]; then
+		find . | sed -e 's/\(.*\)/\"\1\"/g'
+	else
+		find . -name ${1} | sed -e 's/\(.*\)/\"\1\"/g'
+	fi
 }
 
 function s()
@@ -228,11 +234,19 @@ function m2()
 	setndenv dvdroot d:/dev-m2/main/m2/image/wii
 }
 
+function m2art()
+{
+	genv e:/dev-m2art/main/m2
+	export BUILD_SPEC="x360:optimized"
+	export GIT_EDITOR="${AVACYG}/bin/git-scite"
+	setndenv dvdroot e:/dev-m2art/main/m2/image/wii
+}
+
 function cars()
 {
-	genv d:/dev-cars/main/cars
+	genv e:/dev-cars/main/cars
 #	setndenv DvdRoot d:/dev-cars/main/cars/image/wii
-	export BUILD_SPEC="wii:optimized"
+#	export BUILD_SPEC="wii:optimized"
 }
 
 function mybuilds-good()
@@ -240,6 +254,13 @@ function mybuilds-good()
 	# Grab the log from the server
 	curl -s "http://slcmybuilds/api/v1/project/tbx/branch/m2/build/index?status=good&limit=1" | grep "git_sha" | cut -d: -f2 | sed 's/"//g; s/,//g; s/ //g'
 
+}
+
+function smbl()
+{
+	fname=$(ls -lt //pm-utsl-fs01/buildcache/MyBuildsWeb_Logs/msmith3 | head -2 | tail -1 | awk '{print $10}')
+	echo ${fname}
+	tail -f //pm-utsl-fs01/buildcache/MyBuildsWeb_Logs/msmith3/${fname}
 }
 
 #~ __dvdroot()
@@ -253,11 +274,29 @@ function mybuilds-good()
 #~ ($(__dvdroot)$(__git_ps1 ":%s"))\[\e[1;37m\]\$ '
 
 # Git prompt
-PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]
-$(__git_ps1 "(%s)")\[\e[1;37m\]\$ '
+if [ -a ~/ava-cygwin/lib/color ]; then
+	source ~/ava-cygwin/lib/color
+	bracket_color=$(color_fg_rgb 5 5 5)
+	path_color=$(color_fg_rgb 5 5 0)
+	git_color=$(color_fg_rgb 0 5 0)
+	prompt_color=$(color_fg_rgb 5 5 5)
+	
+	# Don't set prompt color if we are in a 
+	if [ -z "${CAFE_ROOT}" ]; then
+		PS1='${color_reset}\n${bracket_color}[${path_color}\w${bracket_color}]${color_reset}\n${git_color}$(__git_ps1 "(%s)")${prompt_color}\$ ${color_reset}'
+	else
+		PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]\n$(__git_ps1 "(%s)")\[\e[1;37m\]\$${color_reset} '
+	fi
+else
+	PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]\n$(__git_ps1 "(%s)")\[\e[1;37m\]\$ '
+fi
+
 
 #PS1='\n\$ '
 
 # Working one
 #PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]
 #\[\e[1;37m\]\$ '
+
+#source ~/prompt_boxy
+
