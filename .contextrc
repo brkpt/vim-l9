@@ -4,6 +4,7 @@ fi
 
 export AVACYG=~/ava-cygwin
 export SCITE=/cygdrive/d/depot/bin/scite/scite.exe
+export GHS_ROOT=d:/dev-m2/external/cafe/ghs/multi5319
 
 function genv()
 {
@@ -261,6 +262,23 @@ function smbl()
 	fname=$(ls -lt //pm-utsl-fs01/buildcache/MyBuildsWeb_Logs/msmith3 | head -2 | tail -1 | awk '{print $10}')
 	echo ${fname}
 	tail -f //pm-utsl-fs01/buildcache/MyBuildsWeb_Logs/msmith3/${fname}
+}
+
+function cafe-demo
+{
+	cd d:/dev-m2/external/cafe/2.8.11
+	./cafe.bat
+}
+
+function cafe-ava
+{
+	export GHS_ROOT=/cygdrive/d/dev-m2/external/cafe/ghs/multi5319
+	export CAFE_CONTENT_DIR=/cygdrive/d/dev-m2/Main/m2/image/cafe
+	echo $CAFE_CONTENT_DIR
+	cd $CAFE_CONTENT_DIR
+	echo
+	echo To run: caferun -d multi Game-M2.debug.rpx 
+	echo
 }
 
 #~ __dvdroot()
