@@ -157,7 +157,7 @@ function buildrvm()
 	else
 		oldpwd=${PWD}
 		cd ${GameImagePath}
-		${UtilScripts}elf-to-rvm.sh "$@"
+		elf-to-rvm.sh "$@"
 		cd ${oldpwd}
 	fi
 }
