@@ -63,6 +63,7 @@ alias precache='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/precache.lua
 alias choinstances='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/choinstances.lua'
 alias iso='cd ${PROJECT_ROOT}/octane/build/iso'
 alias mbg='mybuilds-good'
+alias gw='cd d:/dev-gateway'
 alias ard='cygstart "${PROGRAMFILES}/Arduino/arduino.exe"'
 alias gtln='git-tiny-log-notes'
 
