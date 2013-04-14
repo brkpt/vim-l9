@@ -110,7 +110,7 @@ function s()
 	else
 		for arg in $@; do
 			local fixedpath=$(cygpath -wa "${arg}")
-			cygstart "${scitepath}" "${fixedpath}"
+			cygstart "${scitepath}" \"${fixedpath}\"
 		done
 	fi
 }
