@@ -292,26 +292,30 @@ function cafe-ava
 #~ PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]
 #~ ($(__dvdroot)$(__git_ps1 ":%s"))\[\e[1;37m\]\$ '
 
-# Git prompt
-if [ -a ~/ava-cygwin/lib/color ]; then
-	source ~/ava-cygwin/lib/color
-	bracket_color=$(color_fg_rgb 5 5 5)
-	path_color=$(color_fg_rgb 5 5 0)
-	git_color=$(color_fg_rgb 0 5 0)
-	prompt_color=$(color_fg_rgb 5 5 5)
+# Git mega prompt
+#~ if [ -a ~/ava-cygwin/lib/color ]; then
+	#~ source ~/ava-cygwin/lib/color
+	#~ bracket_color=$(color_fg_rgb 5 5 5)
+	#~ path_color=$(color_fg_rgb 5 5 0)
+	#~ git_color=$(color_fg_rgb 0 5 0)
+	#~ prompt_color=$(color_fg_rgb 5 5 5)
 	
-	# Don't set prompt color if we are in a 
-	if [ -z "${CAFE_ROOT}" ]; then
-		PS1='${color_reset}\n${bracket_color}[${path_color}\w${bracket_color}]${color_reset}\n${git_color}$(__git_ps1 "(%s)")${prompt_color}\$ ${color_reset}'
-	else
-		PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]\n$(__git_ps1 "(%s)")\[\e[1;37m\]\$${color_reset} '
-	fi
-else
-	PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]\n$(__git_ps1 "(%s)")\[\e[1;37m\]\$ '
+	#~ # Don't set prompt color if we are in a 
+	#~ if [ -z "${CAFE_ROOT}" ]; then
+		#~ PS1='${color_reset}\n${bracket_color}[${path_color}\w${bracket_color}]${color_reset}\n${git_color}$(__git_ps1 "(%s)")${prompt_color}\$ ${color_reset}'
+	#~ else
+		#~ PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]\n$(__git_ps1 "(%s)")\[\e[1;37m\]\$${color_reset} '
+	#~ fi
+#~ else
+	#~ PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]\n$(__git_ps1 "(%s)")\[\e[1;37m\]\$ '
+#~ fi
+
+if [ -a ~/ava-cygwin/lib/color ]; then
+	export GIT_PS1_SHOWSTASHSTATE=1
+	source ~/ava-cygwin/lib/color
+	PS1='${color_reset}\n[\w]\n$(__git_ps1 "(%s)")$ '
 fi
 
-
-#PS1='\n\$ '
 
 # Working one
 #PS1='\[\e[0m\]\n[\[\e[33m\]\[\e[1m\]\w\[\e[0m\]]\[\e[37m\]
