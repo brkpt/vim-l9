@@ -40,7 +40,7 @@ function genv()
 alias mcw='(cd "${CWFOLDER_RVL}/bin"; cygstart ide.exe; cygstart ${EXTERNAL_DEPOTBIN}/putty.exe -load "ndev")'
 alias wiiprof='(cd "${REVOLUTION_SDK_ROOT}x86/bin"; cygstart WiiProfiler.exe)'
 alias last='p4last'
-alias gv='cygstart "${PROGRAMFILES}/vim/vim73/gvim.exe"'
+#alias gv='cygstart "${PROGRAMFILES}/vim/vim74/gvim.exe"'
 alias find='/usr/bin/find'
 alias gchl='luaplus ${UtilScripts}getlastp4commit.lua'
 #alias sn='cygstart d:/depot/bin/scite/scite.exe -check.if.already.open=0'
