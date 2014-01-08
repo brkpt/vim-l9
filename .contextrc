@@ -5,6 +5,8 @@ fi
 export AVACYG=~/ava-cygwin
 export SCITE=/cygdrive/d/depot/bin/scite/scite.exe
 export GHS_ROOT=d:/dev-m2/external/cafe/ghs/multi5319
+export WINMERGE="${PROGRAMFILES}/WinMerge/WinMergeU.exe"
+export GIT_EDITOR="${AVACYG}/bin/git-scite"
 
 function genv()
 {
