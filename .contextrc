@@ -98,15 +98,6 @@ function checkgitstatus()
 return 0;
 }
 
-function fq()
-{
-	if [ -z "${1}" ]; then
-		find . | sed -e 's/\(.*\)/\"\1\"/g'
-	else
-		find . -name ${1} | sed -e 's/\(.*\)/\"\1\"/g'
-	fi
-}
-
 function s()
 {
 	local scitepath="${SCITE}"
