@@ -60,14 +60,18 @@ alias screenshot='(cygstart -d "${REVOLUTION_SDK_ROOT}../../screenshot" "${REVOL
 alias wiimap='python "${UtilScripts}/WiiMap/WiiMap.py"'
 alias p4gitsync='(cd $PROJECT_ROOT; ../SyncP4Changelist.sh)'
 alias runtrendy='(cd ${GameImagePath}wii; python ${UtilScripts}WiiMap/WiiMap.py -t Game-Cars.consumer.wii.map)'
-alias preloads='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/preloads.lua'
-alias precache='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/precache.lua'
 alias choinstances='${LuaPlusExe64} ${PROJECT_ROOT}/${GameName}/Scripts/choinstances.lua'
 alias iso='cd ${PROJECT_ROOT}/octane/build/iso'
 alias mbg='mybuilds-good'
 alias gw='cd d:/dev-gateway'
 alias ard='cygstart "${PROGRAMFILES}/Arduino/arduino.exe"'
 alias gtln='git-tiny-log-notes'
+alias lua='${OctanePath}code/Shared/Lua/lua51.bin.vs2010.win32/lua.exe'
+alias wiimemcat='perl $UtilScripts/wiimap/wiimemorytsvcategorizer.pl'
+alias wiimemcatd='perl $UtilScripts/wiimap/wiimemorytsvcategorizerd.pl'
+alias wiimemsummary='perl $UtilScripts/wiimap/wiimemorytsvsummary.pl'
+alias wiimkpivot='e:/python27/python $UtilScripts/wiimap/mkpivot.py'
+alias wiimemsummary='perl $UtilScripts/wiimap/wiimemorytsvsummary.pl'
 
 #~ Checks the current git status to make sure it is:
 #~ 1: On the master branch
