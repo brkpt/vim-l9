@@ -112,12 +112,24 @@ function s()
 	fi
 }
 
-function sn()
+function gv()
 {
-	local scitepath="${SCITE}"
+	local gvpath="${PROGRAMFILES}/vim/vim74/gvim.exe"
+	if [ $# -eq 0 ]; then 
+		cygstart "${gvpath}"
+	else
+		for arg in $@; do
+			local fixedpath=$(cygpath -wa "${arg}")
+			cygstart "${gvpath}" --remote-tab-silent "${fixedpath}"
+		done
+	fi
+}
 
-	if [ $# -eq 0 ]; then
-		cygstart "${scitepath}" -check.if.already.open=0
+function sn() 
+{ 
+	local scitepath="${SCITE}" 
+	if [ $# -eq 0 ]; then 
+		cygstart "${scitepath}" -check.if.already.open=0 
 	else
 		for arg in $@; do
 			local fixedpath=$(cygpath -wa "${arg}")
