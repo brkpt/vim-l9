@@ -113,6 +113,7 @@ alias whence='type -a'                        # where, of a sort
 alias grep='/usr/bin/grep --color'                     # show differences in colour
 alias open='cygstart'
 alias px='cygstart c:/pstools/procexp'
+alias p4='~/ava-cygwin/bin/p4.sh'
 
 #--- Some useful utility aliases
 alias luaplus='${LuaPlusExe64}'
