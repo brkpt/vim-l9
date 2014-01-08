@@ -236,20 +236,38 @@ function excel()
 	fi
 }
 
+function in2()
+{
+	genv d:/dev-in2/main/game
+	export BUILD_SPEC="x360:optimized"
+	#setndenv dvdroot d:/dev-m2/main/m2/image/wii
+}
+
+function m2in2()
+{
+	genv e:/dev-m2-in2/main/m2
+	export BUILD_SPEC="x360:optimized"
+	#setndenv dvdroot d:/dev-m2/main/m2/image/wii
+}
 
 function m2()
 {
-	genv d:/dev-m2/main/m2
+	genv e:/dev-m2/main/m2
 	export BUILD_SPEC="x360:optimized"
-	export GIT_EDITOR="${AVACYG}/bin/git-scite"
-	setndenv dvdroot d:/dev-m2/main/m2/image/wii
+	#setndenv dvdroot d:/dev-m2/main/m2/image/wii
+}
+
+function m2w()
+{
+	genv e:/dev-m2-wii/main/m2
+	export BUILD_SPEC="wii:optimized"
+	setndenv dvdroot e:/dev-m2-wii/main/m2/image/wii
 }
 
 function m2art()
 {
 	genv e:/dev-m2art/main/m2
 	export BUILD_SPEC="x360:optimized"
-	export GIT_EDITOR="${AVACYG}/bin/git-scite"
 	setndenv dvdroot e:/dev-m2art/main/m2/image/wii
 }
 
