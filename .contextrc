@@ -294,14 +294,14 @@ function smbl()
 
 function cafe-demo
 {
-	cd d:/dev-m2/external/cafe/2.8.11
+	cd e:/dev-m2/external/cafe/2.8.11
 	./cafe.bat
 }
 
 function cafe-ava
 {
-	export GHS_ROOT=/cygdrive/d/dev-m2/external/cafe/ghs/multi5319
-	export CAFE_CONTENT_DIR=/cygdrive/d/dev-m2/Main/m2/image/cafe
+	export GHS_ROOT=/cygdrive/e/dev-m2/external/cafe/ghs/multi5319
+	export CAFE_CONTENT_DIR=/cygdrive/e/dev-m2/Main/m2/image/cafe
 	echo $CAFE_CONTENT_DIR
 	cd $CAFE_CONTENT_DIR
 	echo
