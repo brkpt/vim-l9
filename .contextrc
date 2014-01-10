@@ -310,17 +310,6 @@ function cafe-ava
 	echo
 }
 
-function postin2
-{
-	if [ $# -ne 2 ]; then
-		echo You need two parameters: Build name and SHA
-		echo .
-		echo postin2 name sha
-		return 1
-	fi
-	${GitBridgePath}/TeamCity/PostToMyBuilds.bat -name "${1}" in2 master ${2}
-}
-
 #~ __dvdroot()
 #~ {
 	#~ local getndenv="d:/depot/external/wii/ndev/bin/getndenv"
