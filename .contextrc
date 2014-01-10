@@ -238,6 +238,7 @@ function excel()
 
 function in2()
 {
+	export PROJECT_ROOT=d:/dev-in2/main/
 	genv d:/dev-in2/main/game
 	export BUILD_SPEC="x360:optimized"
 	#setndenv dvdroot d:/dev-m2/main/m2/image/wii
